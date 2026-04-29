@@ -1,26 +1,37 @@
 @import "tailwindcss";
 
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --amethyst-50: #fdfcff;
+  --amethyst-100: #faf5ff;
+  --amethyst-200: #f3e8ff;
+  --amethyst-600: #9333ea;
+  --amethyst-700: #7e22ce;
+  --amethyst-900: #581c87;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--amethyst-50);
+  color: #1f2937;
+}
+
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+}
+
+.btn-auth {
+  @apply w-full bg-purple-700 text-white p-3 rounded-xl font-semibold 
+         hover:bg-purple-800 transition-all active:scale-[0.98] 
+         shadow-lg shadow-purple-200;
+}
+
+
+.input-auth {
+  @apply w-full border border-purple-100 p-3 rounded-xl bg-white/80 
+         focus:ring-2 focus:ring-purple-300 focus:border-purple-300 
+         outline-none transition-all;
 }

@@ -1,5 +1,5 @@
 import './globals.css';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -8,8 +8,14 @@ export const metadata: Metadata = {
   title: 'Habit Tracker',
   description: 'Track your daily progress',
   manifest: '/manifest.json',
+};
+
+export const viewport: Viewport = {
   themeColor: '#3b82f6',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false, 
 };
 
 export default function RootLayout({

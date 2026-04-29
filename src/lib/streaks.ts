@@ -1,22 +1,22 @@
+/* MENTOR_TRACE_STAGE3_HABIT_A91 */
 export function calculateCurrentStreak(completions: string[], today?: string): number {
   const now = today || new Date().toISOString().split('T')[0];
-  const sortedCompletions = Array.from(new Set(completions)).sort((a, b) => 
-    new Date(b).getTime() - new Date(a).getTime()
-  );
-
-  if (!sortedCompletions.includes(now)) return 0;
+  const uniqueDates = Array.from(new Set(completions)).sort((a, b) => b.localeCompare(a));
+  
+  if (!uniqueDates.includes(now)) return 0;
 
   let streak = 0;
-  let checkDate = new Date(now);
+  let currentDate = new Date(now);
 
-  for (const dateStr of sortedCompletions) {
-    const d = new Date(dateStr);
-    if (d.toISOString().split('T')[0] === checkDate.toISOString().split('T')[0]) {
+  while (true) {
+    const dateStr = currentDate.toISOString().split('T')[0];
+    if (uniqueDates.includes(dateStr)) {
       streak++;
-      checkDate.setDate(checkDate.getDate() - 1);
-    } else if (new Date(dateStr) < checkDate) {
+      currentDate.setDate(currentDate.getDate() - 1);
+    } else {
       break;
     }
   }
+
   return streak;
 }
