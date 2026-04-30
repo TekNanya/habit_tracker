@@ -17,7 +17,7 @@ describe('auth flow', () => {
   });
 
   afterEach(() => {
-    cleanup(); // This is the crucial line to fix "Found multiple elements"
+    cleanup();
   });
 
   it('submits the signup form and creates a session', async () => {
