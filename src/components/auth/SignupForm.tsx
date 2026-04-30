@@ -2,11 +2,13 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation'; // Added for proper navigation testing
 
 export default function SignupForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const router = useRouter(); // Initialize router
 
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,14 +17,19 @@ export default function SignupForm() {
     const storageKey = 'habit-tracker-users';
     const existingUsers = JSON.parse(localStorage.getItem(storageKey) || '[]');
 
-    // 2. Check for duplicate email
+    // 2. Check for duplicate email - TRD requires exact error message
     if (existingUsers.find((u: any) => u.email === email)) {
-      setError('This email is already registered.');
+      setError('User already exists');
       return;
     }
 
-    // 3. Create and save user
-    const newUser = { id: crypto.randomUUID(), email, password };
+    // 3. Create and save user - Ensure shape matches TRD Requirement 5
+    const newUser = { 
+      id: crypto.randomUUID(), 
+      email, 
+      password,
+      createdAt: new Date().toISOString() 
+    };
     const updatedUsers = [...existingUsers, newUser];
     localStorage.setItem(storageKey, JSON.stringify(updatedUsers));
 
@@ -32,8 +39,8 @@ export default function SignupForm() {
       email: newUser.email 
     }));
 
-    // 5. Redirect immediately
-    window.location.href = '/dashboard';
+    // 5. Redirect using router.push for test compatibility
+    router.push('/dashboard');
   };
 
   return (
@@ -43,6 +50,7 @@ export default function SignupForm() {
         <p className="text-purple-600 mt-2 mb-8">Your journey to consistency begins here.</p>
         
         <form onSubmit={handleSignup} className="space-y-5">
+          {/* Error display - Text matches TRD exactly */}
           {error && <p className="text-red-500 text-sm font-bold bg-red-50 p-3 rounded-xl">{error}</p>}
           
           <div>

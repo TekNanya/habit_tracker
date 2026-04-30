@@ -55,13 +55,13 @@ export default function HabitCard({ habit, onUpdate }: { habit: Habit; onUpdate:
       <button
         data-testid={`habit-complete-${slug}`}
         onClick={handleToggle}
-        className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
+        className={`px-4 h-12 rounded-2xl flex items-center justify-center transition-all font-bold text-sm ${
           isCompleted 
           ? 'bg-purple-600 text-white shadow-lg shadow-purple-200' 
-          : 'bg-purple-50 text-purple-300 border-2 border-purple-100'
+          : 'bg-purple-50 text-purple-600 border-2 border-purple-100'
         }`}
       >
-        <span className="text-2xl font-bold">{isCompleted ? '✓' : '+'}</span>
+        {isCompleted ? 'Completed' : 'Mark Done'}
       </button>
     </div>
   );
